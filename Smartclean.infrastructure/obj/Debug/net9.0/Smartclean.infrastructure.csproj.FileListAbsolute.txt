@@ -1,0 +1,11 @@
+D:\Smartclean\Smartclean.infrastructure\bin\Debug\net9.0\Smartclean.infrastructure.deps.json
+D:\Smartclean\Smartclean.infrastructure\bin\Debug\net9.0\Smartclean.infrastructure.dll
+D:\Smartclean\Smartclean.infrastructure\bin\Debug\net9.0\Smartclean.infrastructure.pdb
+D:\Smartclean\Smartclean.infrastructure\obj\Debug\net9.0\Smartclean.infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Smartclean\Smartclean.infrastructure\obj\Debug\net9.0\Smartclean.infrastructure.AssemblyInfoInputs.cache
+D:\Smartclean\Smartclean.infrastructure\obj\Debug\net9.0\Smartclean.infrastructure.AssemblyInfo.cs
+D:\Smartclean\Smartclean.infrastructure\obj\Debug\net9.0\Smartclean.infrastructure.csproj.CoreCompileInputs.cache
+D:\Smartclean\Smartclean.infrastructure\obj\Debug\net9.0\Smartclean.infrastructure.dll
+D:\Smartclean\Smartclean.infrastructure\obj\Debug\net9.0\refint\Smartclean.infrastructure.dll
+D:\Smartclean\Smartclean.infrastructure\obj\Debug\net9.0\Smartclean.infrastructure.pdb
+D:\Smartclean\Smartclean.infrastructure\obj\Debug\net9.0\ref\Smartclean.infrastructure.dll
