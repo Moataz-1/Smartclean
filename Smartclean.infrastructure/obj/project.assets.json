@@ -110,6 +110,20 @@
         "build": {
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
+      },
+      "Smartclean.core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Swashbuckle.AspNetCore": "10.3.1",
+          "Swashbuckle.AspNetCore.Swagger": "10.3.1"
+        },
+        "compile": {
+          "bin/placeholder/Smartclean.core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Smartclean.core.dll": {}
+        }
       }
     }
   },
@@ -538,10 +552,16 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Smartclean.core/1.0.0": {
+      "type": "project",
+      "path": "../Smartclean.core/Smartclean.core.csproj",
+      "msbuildProject": "../Smartclean.core/Smartclean.core.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "Smartclean.core >= 1.0.0",
       "Swashbuckle.AspNetCore >= 10.3.1",
       "Swashbuckle.AspNetCore.Swagger >= 10.3.1"
     ]
@@ -578,7 +598,11 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Smartclean\\Smartclean.core\\Smartclean.core.csproj": {
+              "projectPath": "D:\\Smartclean\\Smartclean.core\\Smartclean.core.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
