@@ -13,7 +13,10 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Repositries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Smartclean.core\Smartclean.core.csproj" />
   </ItemGroup>
 
 </Project>
