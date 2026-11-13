@@ -1,7 +1,10 @@
 .vs/
+.vs/
 bin/
 obj/
 
 *.user
 *.suo
 *.cache
+**/appsettings.Development.json
+**/appsettings.Local.json
