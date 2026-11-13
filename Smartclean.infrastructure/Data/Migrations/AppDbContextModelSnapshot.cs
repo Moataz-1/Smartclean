@@ -41,6 +41,14 @@ namespace Smartclean.infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "test",
+                            Name = "test"
+                        });
                 });
 
             modelBuilder.Entity("Smartclean.core.Entities.Product.Photo", b =>
@@ -93,6 +101,16 @@ namespace Smartclean.infrastructure.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            Description = "test",
+                            Name = "test",
+                            Price = 12m
+                        });
                 });
 
             modelBuilder.Entity("Smartclean.core.Entities.Product.Photo", b =>
