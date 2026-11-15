@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Smartclean.core.Interfaces;
 
@@ -9,9 +10,11 @@ namespace Smartclean.API.Controllers
     public class BaseController : ControllerBase
     {
         protected readonly IUnitOfWork _work;
-        public BaseController(IUnitOfWork work)
+        protected readonly IMapper _mapper;
+        public BaseController(IUnitOfWork work, IMapper mapper)
         {
             _work = work;
+            _mapper = mapper;
         }
     }
 }

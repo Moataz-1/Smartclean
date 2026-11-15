@@ -1,0 +1,18 @@
+﻿using AutoMapper;
+using Smartclean.core.DTO;
+using Smartclean.core.Entities.Product;
+
+namespace Smartclean.API.Mapping
+{
+    public class ProductMapping :Profile
+    {
+        public ProductMapping()
+        {
+            CreateMap<Product, ProductDTO>
+                ().ForMember(x => x.CategoryName, op => op.MapFrom(src => src.Category.Name))
+                .
+                ReverseMap();
+            CreateMap<Photo, PhotoDTO>().ReverseMap();
+        }
+    }
+}
