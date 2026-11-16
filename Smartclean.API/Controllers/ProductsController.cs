@@ -1,31 +1,31 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Smartclean.API.Helper;
 using Smartclean.core.DTO;
 using Smartclean.core.Interfaces;
+using Smartclean.core.Services;
+using Smartclean.core.Sharing;
 
 namespace Smartclean.API.Controllers
 {
     public class ProductsController : BaseController
     {
-        public ProductsController(IUnitOfWork work, IMapper mapper) : base(work, mapper)
+        private readonly IImageManagementService imageManagementService;
+        public ProductsController(IUnitOfWork work, IMapper mapper, IImageManagementService imageManagementService) : base(work, mapper)
         {
+            this.imageManagementService = imageManagementService;
         }
         [HttpGet("get-all")]
-        public async Task<IActionResult> get()
+        public async Task<IActionResult> get([FromQuery]ProductParams productParams)
         {
             try
             {
+
                 var Product = await _work.ProductRepositry
-                    .GetAllAsync(x => x.Category, x => x.Photos);
-                var result = _mapper.Map<List<ProductDTO>>(Product);
-                if (Product is null) 
-                {
-                    return BadRequest(new ResponseAPI(400));
-                }
-                return Ok(result);
+                    .GetAllAsync(productParams);
+
+                var totalCount = await _work.ProductRepositry.CountAsync();
+                return Ok(new Pagination<ProductDTO>(productParams.PageNumber, productParams.pageSize, totalCount, Product));
             }
             catch (Exception ex)
             {
@@ -33,6 +33,7 @@ namespace Smartclean.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpGet("get-by-id/{id}")]
         public async Task<IActionResult> getById(int id)
         {
@@ -54,6 +55,7 @@ namespace Smartclean.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpPost("add-product")]
         public async Task<IActionResult> add(AddProductDTO productDTO)
         {
@@ -68,6 +70,7 @@ namespace Smartclean.API.Controllers
                 return BadRequest(new ResponseAPI(400, ex.Message));
             }
         }
+
         [HttpPut ("update-product")]
         public async Task<IActionResult> Update(UpdateProductDTO updateProductDTO)
         {
@@ -82,6 +85,7 @@ namespace Smartclean.API.Controllers
                 return BadRequest(new ResponseAPI(400, ex.Message));
             }
         }
+
         [HttpDelete("delete-product/{id}")]
         public async Task<IActionResult> delete(int id)
         {

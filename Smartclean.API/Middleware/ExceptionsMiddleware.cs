@@ -11,25 +11,27 @@ namespace Smartclean.API.Middelware
         private readonly IHostEnvironment _environment;
         private readonly IMemoryCache _memoryCash;
         private readonly TimeSpan _rateLimitWindow = TimeSpan.FromSeconds(30);
-        public ExceptionsMiddleware(RequestDelegate next, IHostEnvironment environment = null, IMemoryCache memoryCash = null, TimeSpan timeSpan = default)
+        public ExceptionsMiddleware(RequestDelegate next, IHostEnvironment environment, IMemoryCache memoryCash)
         {
             _next = next;
             _environment = environment;
             _memoryCash = memoryCash;
-            _rateLimitWindow = timeSpan;
         }
         public async Task InvokeAsync(HttpContext context)
         {
             try
             {
+                ApplySecurity(context);
+
                 if (IsRequestAllowed(context) == false) 
                 {
                     context.Response.StatusCode = (int)HttpStatusCode.TooManyRequests;
                     context.Response.ContentType = "application/json";
                     var response = new ApiException((int)HttpStatusCode.TooManyRequests, "Too many Request. Pleas Try again later");
                     await context.Response.WriteAsJsonAsync(response);
+                    return;
                 }
-                _next(context);
+                await _next(context);
             }
             catch (Exception ex)
             {
@@ -50,7 +52,7 @@ namespace Smartclean.API.Middelware
         }
         private bool IsRequestAllowed(HttpContext context) 
         {
-            var ip = context.Connection.RemoteIpAddress.ToString();
+            var ip = context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
             var cashkey = $"Rate: {ip}";
             var dateNow = DateTime.Now;
 
@@ -72,6 +74,13 @@ namespace Smartclean.API.Middelware
                 _memoryCash.Set(cashkey, (timesTamp, count), _rateLimitWindow);
             }
             return true;
+        }
+
+        private void ApplySecurity(HttpContext context)
+        {
+            context.Response.Headers["X-Content-Type.Options"] = "nosniff";
+            context.Response.Headers["X-XSS-Protection"] = "1;mode=block";
+            context.Response.Headers["X-Frame-Options"] = "DENY";
         }
     }
 }

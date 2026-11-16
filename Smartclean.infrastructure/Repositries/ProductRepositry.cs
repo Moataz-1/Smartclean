@@ -4,6 +4,7 @@ using Smartclean.core.DTO;
 using Smartclean.core.Entities.Product;
 using Smartclean.core.Interfaces;
 using Smartclean.core.Services;
+using Smartclean.core.Sharing;
 using Smartclean.infrastructure.Data;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,41 @@ namespace Smartclean.infrastructure.Repositries
             this.context = context;
             this.mapper = mapper;
             this.imageManagementService = imageManagementService;
+        }
+
+        public async Task<IEnumerable<ProductDTO>> GetAllAsync(ProductParams productParams)
+        {
+            var query = context.Products
+                .Include(m => m.Category)
+                .Include(m => m.Photos)
+                .AsNoTracking();
+
+            if (!string.IsNullOrEmpty(productParams.Search))
+            {
+                var searchWords = productParams.Search.Split(' ');
+                query = query.Where(m => searchWords.All(word =>
+                m.Name.ToLower().Contains(word.ToLower()) 
+                ||
+                m.Description.ToLower().Contains(word.ToLower())
+                ));
+            }
+
+            if (productParams.CategoryId.HasValue) query = query.Where(m => m.CategoryId == productParams.CategoryId);
+
+            if (!string.IsNullOrEmpty(productParams.Sort))
+            {
+                query = productParams.Sort switch
+                {
+                    "PriceAce" => query.OrderBy(m => m.NewPrice),
+                    "PriceDes" => query.OrderByDescending(m => m.NewPrice),
+                    _ => query.OrderBy(m => m.Name),
+                };
+            }
+
+            query = query.Skip((productParams.pageSize) * (productParams.PageNumber - 1)).Take(productParams.pageSize);
+
+            var products = await query.ToListAsync();
+            return mapper.Map<List<ProductDTO>>(products);
         }
 
         public async Task<bool> AddAsync(AddProductDTO productDTO)
