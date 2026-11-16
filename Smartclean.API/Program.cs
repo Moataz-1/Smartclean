@@ -1,11 +1,13 @@
 using Smartclean.infrastructure;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddSingleton<IFileProvider>(builder.Environment.WebRootFileProvider);
+builder.Services.infrastructureConfiguration(builder.Configuration);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -13,6 +13,9 @@ namespace Smartclean.API.Mapping
                 .
                 ReverseMap();
             CreateMap<Photo, PhotoDTO>().ReverseMap();
+            CreateMap<AddProductDTO, Product>()
+                .ForMember(m => m.Photos, op => op.Ignore())
+                .ReverseMap();
         }
     }
 }

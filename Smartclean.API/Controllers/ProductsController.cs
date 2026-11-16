@@ -50,7 +50,21 @@ namespace Smartclean.API.Controllers
             catch (Exception ex)
             {
 
-                throw;
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPost("add-product")]
+        public async Task<IActionResult> add(AddProductDTO productDTO)
+        {
+            try
+            {
+                await _work.ProductRepositry.AddAsync(productDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(new ResponseAPI(400, ex.Message));
             }
         }
     }

@@ -100,9 +100,12 @@ namespace Smartclean.infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<decimal>("Price")
+                    b.Property<decimal>("NewPrice")
                         .HasPrecision(18, 2)
                         .HasColumnType("numeric(18,2)");
+
+                    b.Property<decimal>("OldPrice")
+                        .HasColumnType("numeric");
 
                     b.HasKey("Id");
 
@@ -117,7 +120,8 @@ namespace Smartclean.infrastructure.Data.Migrations
                             CategoryId = 1,
                             Description = "test",
                             Name = "test",
-                            Price = 12m
+                            NewPrice = 12m,
+                            OldPrice = 0m
                         });
                 });
 

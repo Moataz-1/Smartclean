@@ -1,14 +1,10 @@
-﻿using Smartclean.core.Entities.Product;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Smartclean.core.DTO;
+using Smartclean.core.Entities.Product;
 
 namespace Smartclean.core.Interfaces
 {
     public interface IProductRepositry:IGenericRepositry<Product>
     {
-        //for future
+        Task<bool> AddAsync(AddProductDTO productDTO);
     }
 }
