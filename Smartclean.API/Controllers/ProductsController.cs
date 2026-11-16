@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Smartclean.API.Helper;
 using Smartclean.core.DTO;
@@ -59,7 +60,37 @@ namespace Smartclean.API.Controllers
             try
             {
                 await _work.ProductRepositry.AddAsync(productDTO);
-                return Ok();
+                return Ok( new ResponseAPI (200));
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(new ResponseAPI(400, ex.Message));
+            }
+        }
+        [HttpPut ("update-product")]
+        public async Task<IActionResult> Update(UpdateProductDTO updateProductDTO)
+        {
+            try
+            {
+                await _work.ProductRepositry.UpdateAsync(updateProductDTO);
+                return Ok(new ResponseAPI(200));
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(new ResponseAPI(400, ex.Message));
+            }
+        }
+        [HttpDelete("delete-product/{id}")]
+        public async Task<IActionResult> delete(int id)
+        {
+            try
+            {
+                var product = await _work.ProductRepositry
+                    .GetByIdAsync(id, x => x.Photos, x => x.Category);
+                await _work.ProductRepositry.DeleteAsync(product);
+                return Ok(new ResponseAPI(200));
             }
             catch (Exception ex)
             {

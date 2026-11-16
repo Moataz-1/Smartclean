@@ -16,6 +16,10 @@ namespace Smartclean.API.Mapping
             CreateMap<AddProductDTO, Product>()
                 .ForMember(m => m.Photos, op => op.Ignore())
                 .ReverseMap();
+
+            CreateMap<UpdateProductDTO, Product>()
+                .ForMember(m => m.Photos, op => op.Ignore())
+                .ReverseMap();
         }
     }
 }
