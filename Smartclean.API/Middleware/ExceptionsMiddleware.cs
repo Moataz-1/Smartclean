@@ -3,7 +3,7 @@ using Smartclean.API.Helper;
 using System.Net;
 using System.Text.Json;
 
-namespace Smartclean.API.Middelware
+namespace Smartclean.API.Middleware
 {
     public class ExceptionsMiddleware
     {

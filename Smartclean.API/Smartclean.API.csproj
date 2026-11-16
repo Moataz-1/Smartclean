@@ -4,6 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>Smartclean.API-1c44fd4e-7dc7-4e27-9104-3c603f1ad6e6</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

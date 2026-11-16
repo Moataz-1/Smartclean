@@ -3,7 +3,7 @@ using Smartclean.core.Interfaces;
 using Smartclean.infrastructure.Data;
 using System.Linq.Expressions;
 
-namespace Smartclean.infrastructure.Repositries
+namespace Smartclean.infrastructure.Repositories
 {
     public class GenricRepositry<T> : IGenericRepositry<T> where T : class
     {

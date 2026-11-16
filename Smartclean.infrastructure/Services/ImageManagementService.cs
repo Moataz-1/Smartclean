@@ -2,7 +2,7 @@
 using Microsoft.Extensions.FileProviders;
 using Smartclean.core.Services;
 
-namespace Smartclean.infrastructure.Repositries.Service
+namespace Smartclean.infrastructure.Services
 {
     public class ImageManagementService : IImageManagementService
     {

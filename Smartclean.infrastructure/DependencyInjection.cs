@@ -5,14 +5,14 @@ using Microsoft.Extensions.FileProviders;
 using Smartclean.core.Interfaces;
 using Smartclean.core.Services;
 using Smartclean.infrastructure.Data;
-using Smartclean.infrastructure.Repositries;
-using Smartclean.infrastructure.Repositries.Service;
+using Smartclean.infrastructure.Repositories;
+using Smartclean.infrastructure.Services;
 
 namespace Smartclean.infrastructure
 {
     public static class InfrastructureRegistration
     {
-        public static IServiceCollection infrastructureConfiguration(
+        public static IServiceCollection AddInfrastructure(
             this IServiceCollection services,
             IConfiguration configuration)
         {

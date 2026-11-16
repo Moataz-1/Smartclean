@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Smartclean.infrastructure.Repositries
+namespace Smartclean.infrastructure.Repositories
 {
     public class ProductRepositry : GenricRepositry<Product>, IProductRepositry
     {
