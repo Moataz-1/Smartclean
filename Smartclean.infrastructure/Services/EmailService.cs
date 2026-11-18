@@ -31,7 +31,7 @@ namespace Smartclean.infrastructure.Services
                         _configuration["EmailSettings:smtp"], 
                         int.Parse(_configuration["EmailSettings:Port"]), true);
                     await smtp.AuthenticateAsync(
-                        _configuration["EmailSettings:Name"],
+                        _configuration["EmailSettings:userName"],
                         _configuration["EmailSettings:Password"]);
 
                     await smtp.SendAsync(message);
