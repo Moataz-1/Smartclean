@@ -71,7 +71,7 @@ namespace Smartclean.infrastructure.Repositories
             {
                 string token = await _userManager.GenerateEmailConfirmationTokenAsync(findUser);
                 await SendEmail(findUser.Email, token, "activ", "Active Acount", "Pleas active your E-Mail, Click on Button to Active");
-                return "Please confirm your email first, we have sent activat email";
+                return "please confirm your email first, we have sent activat email";
             }
 
             var result = await _signInManager.PasswordSignInAsync(findUser, loginDTO.Password, true, false);
@@ -80,8 +80,9 @@ namespace Smartclean.infrastructure.Repositories
                 string token = _generateToken.GetAndCreateToken(findUser);
                 return token;
             }
-            return "pleas check your email or password";
+            return "please check your email or password";
         }
+
         public async Task<bool> SendEmailForForgetPassword(string email) 
         {
             var findUser = await _userManager.FindByEmailAsync(email);
