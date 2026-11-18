@@ -39,9 +39,15 @@ namespace Smartclean.API.Middleware
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 context.Response.ContentType = "application/json";
 
+                string details = ex.StackTrace ?? "";
+                if (ex.InnerException != null)
+                {
+                    details = $"Inner: {ex.InnerException.Message}\r\n{ex.InnerException.StackTrace}\r\n{details}";
+                }
+
                 var response = _environment.IsDevelopment() ?
                     new ApiException((int)HttpStatusCode.InternalServerError,
-                    ex.Message, ex.StackTrace)
+                    ex.Message, details)
                     : new ApiException((int)HttpStatusCode.InternalServerError,
                     ex.Message);
 

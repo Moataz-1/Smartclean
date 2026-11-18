@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace Smartclean.core.Entities
 {
-    public class BaseEntity
+    public class BaseEntity<T>
     {
-        public int Id { get; set; }
+        public T Id { get; set; }
 
+    }
+
+    public class BaseEntity : BaseEntity<int>
+    {
     }
 }

@@ -30,12 +30,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseCors("CORSPolicy");
-app.UseMiddleware<ExceptionsMiddleware>();
-app.UseStatusCodePagesWithReExecute("/errors/{0}");
-app.UseHttpsRedirection();
 
+app.UseMiddleware<ExceptionsMiddleware>();
+app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseStaticFiles();
+app.UseStatusCodePagesWithReExecute("/errors/{0}");
+
+app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
