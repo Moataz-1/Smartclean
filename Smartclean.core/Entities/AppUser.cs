@@ -5,7 +5,8 @@ namespace Smartclean.core.Entities
 {
     public class AppUser : IdentityUser
     {
-        public string? DisplayName { get; set; }
+        public string? Name { get; set; }
+        public string? Vorname { get; set; }
         public Address? Address { get; set; }
     }
 }

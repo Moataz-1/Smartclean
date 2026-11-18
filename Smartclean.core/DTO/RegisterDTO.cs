@@ -17,7 +17,8 @@ namespace Smartclean.core.DTO
     }
     public record RegisterDTO : LoginDTO
     {
-        public string UserName { get; set; }
+        public string Name { get; set; }
+        public string Vorname { get; set; }
     }
     public record ActiveAcountDTO
     {
