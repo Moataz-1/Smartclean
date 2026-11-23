@@ -32,7 +32,7 @@ namespace Smartclean.infrastructure.Repositories
             if(registerDTO == null)
                 return null;
 
-            if (await _userManager.FindByNameAsync(registerDTO.Name) != null)
+            if(await _userManager.FindByNameAsync(registerDTO.Name) != null && await _userManager.FindByNameAsync(registerDTO.UserName) != null)
                 return "Name already exists";
 
             if(await _userManager.FindByEmailAsync(registerDTO.Email) != null)
@@ -40,8 +40,8 @@ namespace Smartclean.infrastructure.Repositories
 
             AppUser user = new AppUser()
             {
-                UserName = registerDTO.UserName,
                 Name = registerDTO.Name,
+                UserName =  registerDTO.UserName,
                 Email = registerDTO.Email
             };
             var result= await _userManager.CreateAsync(user, registerDTO.Password);
